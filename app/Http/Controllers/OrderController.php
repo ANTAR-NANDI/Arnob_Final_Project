@@ -144,7 +144,7 @@ class OrderController extends Controller
             'actionURL' => route('order.show', $order->id),
             'fas' => 'fa-file-alt'
         ];
-        Notification::send($users, new StatusNotification($details));
+        // Notification::send($users, new StatusNotification($details));
         if (request('payment_method') == 'paypal') {
             return redirect()->route('payment')->with(['id' => $order->id]);
         } else {

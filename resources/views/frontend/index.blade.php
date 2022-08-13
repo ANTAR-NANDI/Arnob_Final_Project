@@ -62,7 +62,7 @@
 <!--/ End Slider Area -->
 
 <!-- Start Small Banner  -->
-<section class="small-banner section">
+{{--<section class="small-banner section">
     <div class="container-fluid">
         <div class="row">
             @php
@@ -76,22 +76,22 @@
                 <div class="single-banner">
                     @if($cat->photo)
                     <img src="{{asset('/uploads/images/categories'). '/' . $cat->photo}}" alt="Category_image">
-                    @else
-                    <img src="{{asset('backend/img/avatar.png')}}" alt="avatar.png">
-                    @endif
-                    <div class="content">
-                        <h3>{{$cat->title}}</h3>
-                        <a href="{{route('product-cat',$cat->slug)}}">Discover Now</a>
-                    </div>
-                </div>
-            </div>
-            @endif
-            <!-- /End Single Banner  -->
-            @endforeach
-            @endif
-        </div>
-    </div>
-</section>
+@else
+<img src="{{asset('backend/img/avatar.png')}}" alt="avatar.png">
+@endif
+<div class="content">
+    <h3>{{$cat->title}}</h3>
+    <a href="{{route('product-cat',$cat->slug)}}">Discover Now</a>
+</div>
+</div>
+</div>
+@endif
+<!-- /End Single Banner  -->
+@endforeach
+@endif
+</div>
+</div>
+</section> --}}
 <!-- End Small Banner -->
 
 <!-- Start Product Area -->

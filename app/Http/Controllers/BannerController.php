@@ -38,7 +38,7 @@ class BannerController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'title' => 'string|required|max:50',
+            'title' => 'string|nullable|max:50',
             'description' => 'string|nullable',
             'photo' => 'required',
             'status' => 'required|in:active,inactive',
@@ -109,7 +109,7 @@ class BannerController extends Controller
     {
         $banner = Banner::findOrFail($id);
         $this->validate($request, [
-            'title' => 'string|required|max:50',
+            'title' => 'string|nullable|max:50',
             'description' => 'string|nullable',
             // 'photo' => 'required',
             'status' => 'required|in:active,inactive',

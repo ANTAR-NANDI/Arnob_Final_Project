@@ -9,7 +9,7 @@
       @csrf
       @method('PATCH')
       <div class="form-group">
-        <label for="inputTitle" class="col-form-label">Title <span class="text-danger">*</span></label>
+        <label for="inputTitle" class="col-form-label">Title</label>
         <input id="inputTitle" type="text" name="title" placeholder="Enter title" value="{{$banner->title}}" class="form-control">
         @error('title')
         <span class="text-danger">{{$message}}</span>

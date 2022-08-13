@@ -55,7 +55,7 @@ class ProductController extends Controller
             'child_cat_id' => 'nullable|exists:categories,id',
             'is_featured' => 'sometimes|in:1',
             'status' => 'required|in:active,inactive',
-            'condition' => 'required|in:default,new,hot',
+            'condition' => 'nullable|in:default,new,hot',
             'price' => 'required|numeric',
             'discount' => 'nullable|numeric'
         ]);
@@ -67,7 +67,7 @@ class ProductController extends Controller
         $product->cat_id = $request->cat_id;
         $product->child_cat_id = $request->child_cat_id;
         $product->price = $request->price;
-        $product->discount = $request->discount;
+        $product->discount = $request->discount ? $request->discount : 0;
         $slug = Str::slug($request->title);
         $count = Product::where('slug', $slug)->count();
         if ($count > 0) {
@@ -81,7 +81,7 @@ class ProductController extends Controller
             $product->size = '';
         }
         $product->brand_id = $request->brand_id;
-        $product->condition = $request->condition;
+        $product->condition = $request->condition ? $request->condition : 'default';
         $product->stock = $request->stock;
         $product->status = $request->status;
         //upload image
@@ -148,7 +148,7 @@ class ProductController extends Controller
             'title' => 'string|required',
             'summary' => 'string|required',
             'description' => 'string|nullable',
-            'photo' => 'required',
+            'photo' => 'nullable',
             'size' => 'nullable',
             'stock' => "required|numeric",
             'cat_id' => 'required|exists:categories,id',
@@ -156,7 +156,7 @@ class ProductController extends Controller
             'is_featured' => 'sometimes|in:1',
             'brand_id' => 'nullable|exists:brands,id',
             'status' => 'required|in:active,inactive',
-            'condition' => 'required|in:default,new,hot',
+            'condition' => 'required|nullable|in:default,new,hot',
             'price' => 'required|numeric',
             'discount' => 'nullable|numeric'
         ]);
@@ -174,7 +174,7 @@ class ProductController extends Controller
         $product->cat_id = $request->cat_id;
         $product->child_cat_id = $request->child_cat_id;
         $product->price = $request->price;
-        $product->discount = $request->discount;
+        $product->discount = $request->discount ? $request->discount : 0;
         if ($request->hasfile('photo')) {
             // dd("Test");
             if (file_exists(public_path() . '/uploads/thumbnail/products/' . $product->photo)) {

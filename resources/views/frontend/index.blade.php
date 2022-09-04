@@ -439,9 +439,10 @@
         </div>
     </div>
 </section>
+<br>
 <!-- End Shop Services Area -->
 
-@include('frontend.layouts.newsletter')
+
 
 <!-- Modal -->
 @if($product_lists)

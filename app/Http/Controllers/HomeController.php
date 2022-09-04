@@ -22,6 +22,7 @@ class HomeController extends Controller
     {
         $profile = Auth()->user();
         // return $profile;
+        dd($profile);
         return view('user.users.profile')->with('profile', $profile);
     }
 

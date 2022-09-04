@@ -111,10 +111,10 @@
 		<iframe src="https://maps.google.com/maps?q=paharika%20housing%20estate&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
 	</div>
 </div>
+<br>
 <!--/ End Map Section -->
 
 <!-- Start Shop Newsletter  -->
-@include('frontend.layouts.newsletter')
 <!-- End Shop Newsletter -->
 <!--================Contact Success  =================-->
 <div class="modal fade" id="success" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

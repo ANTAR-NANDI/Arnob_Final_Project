@@ -227,8 +227,10 @@
 			</div>
 		</div>
 	</div>
+	<br>
 </section>
+
 <!-- End Shop Services Area -->
 
-@include('frontend.layouts.newsletter')
+
 @endsection

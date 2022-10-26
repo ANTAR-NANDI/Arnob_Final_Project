@@ -2,7 +2,7 @@
 <footer class="sticky-footer bg-white">
   <div class="container my-auto">
     <div class="copyright text-center my-auto">
-      <span>Copyright &copy; <a href="#" target="_blank">WhoAmI</a> 2022</span>
+      <span>Copyright &copy; <a href="#" target="_blank">Prism It & Consultancy</a> 2022</span>
     </div>
   </div>
 </footer>

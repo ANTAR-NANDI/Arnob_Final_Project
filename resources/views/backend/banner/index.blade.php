@@ -20,7 +20,7 @@
           <tr>
             <th>S.N.</th>
             <th>Title</th>
-            <!-- <th>Slug</th> -->
+            <th>Slug</th>
             <th>Photo</th>
             <th>Status</th>
             <th>Action</th>
@@ -28,12 +28,12 @@
         </thead>
         <tfoot>
           <tr>
-            <!-- <th>S.N.</th>
+            <th>S.N.</th>
             <th>Title</th>
             <th>Slug</th>
             <th>Photo</th>
             <th>Status</th>
-            <th>Action</th> -->
+            <th>Action</th>
           </tr>
         </tfoot>
         <tbody>
@@ -41,7 +41,7 @@
           <tr>
             <td>{{$banner->id}}</td>
             <td>{{$banner->title ? $banner->title : 'N\A' }}</td>
-            <!-- <td>{{$banner->slug}}</td> -->
+            <td>{{$banner->slug}}</td>
             <td>
               @if($banner->photo)
 

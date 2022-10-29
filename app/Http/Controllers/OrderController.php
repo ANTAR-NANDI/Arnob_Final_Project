@@ -198,7 +198,7 @@ class OrderController extends Controller
             'status' => 'required|in:new,process,delivered,cancel'
         ]);
         $data = $request->all();
-        // return $request->status;
+        // dd($order);
         if ($request->status == 'delivered') {
             foreach ($order->cart as $cart) {
                 $product = $cart->product;

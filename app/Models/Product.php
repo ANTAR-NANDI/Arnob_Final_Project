@@ -15,7 +15,7 @@ class Product extends Model
     }
     public static function getProductBySlug($slug)
     {
-        return Product::with(['cat_info', 'rel_prods', 'getReview'])->where('slug', $slug)->first();
+        return Product::with(['cat_info'])->where('slug', $slug)->first();
     }
     public function rel_prods()
     {

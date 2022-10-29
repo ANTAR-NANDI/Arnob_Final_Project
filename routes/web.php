@@ -189,7 +189,7 @@ Route::get('/product-brand/{slug}', [FrontendController::class,'productBrand'])-
 // Product Review
 Route::resource('/review', ProductReviewController::class);
 // Post Comment 
-Route::post('post/{slug}/comment', 'PostCommentController@store')->name('post-comment.store');
+Route::post('post/{slug}/comment', [PostCommentController::class,'store'])->name('post-comment.store');
 Route::resource('/comment', PostCommentController::class);
 //Products
 Route::post('/product/search', [FrontendController::class, 'productSearch'])->name('product.search');

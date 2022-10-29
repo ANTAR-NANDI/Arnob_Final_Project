@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\PostComment;
 
+use App\Models\Post;
+use Notification;
+use App\Models\User;
 class PostCommentController extends Controller
 {
     /**
@@ -36,7 +39,27 @@ class PostCommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $post_info = Post::getPostBySlug($request->slug);
+        // return $post_info;
+        $data = $request->all();
+        $data['user_id'] = $request->user()->id;
+        // $data['post_id']=$post_info->id;
+        $data['status'] = 'active';
+        // return $data;
+        $status = PostComment::create($data);
+        // $user = User::where('role', 'admin')->get();
+        // $details = [
+        //     'title' => "New Comment created",
+        //     'actionURL' => route('blog.detail', $post_info->slug),
+        //     'fas' => 'fas fa-comment'
+        // ];
+        // Notification::send($user, new StatusNotification($details));
+        if ($status) {
+            request()->session()->flash('success', 'Thank you for your comment');
+        } else {
+            request()->session()->flash('error', 'Something went wrong! Please try again!!');
+        }
+        return redirect()->back();
     }
 
     /**

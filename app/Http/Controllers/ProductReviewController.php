@@ -41,26 +41,27 @@ class ProductReviewController extends Controller
      */
     public function store(Request $request)
     {
+       // dd($request->slug);
         $this->validate($request, [
             'rate' => 'required|numeric|min:1'
         ]);
         $product_info = Product::getProductBySlug($request->slug);
-        //  return $product_info;
+       // dd($request->slug);
         // return $request->all();
         $data = $request->all();
         $data['product_id'] = $product_info->id;
         $data['user_id'] = $request->user()->id;
         $data['status'] = 'active';
-        // dd($data);
+        //dd($data);
         $status = ProductReview::create($data);
 
-        $user = User::where('role', 'admin')->get();
-        $details = [
-            'title' => 'New Product Rating!',
-            'actionURL' => route('product-detail', $product_info->slug),
-            'fas' => 'fa-star'
-        ];
-        Notification::send($user, new StatusNotification($details));
+        // $user = User::where('role', 'admin')->get();
+        // $details = [
+        //     'title' => 'New Product Rating!',
+        //     'actionURL' => route('product-detail', $product_info->slug),
+        //     'fas' => 'fa-star'
+        // ];
+        //Notification::send($user, new StatusNotification($details));
         if ($status) {
             request()->session()->flash('success', 'Thank you for your feedback');
         } else {

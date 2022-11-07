@@ -80,9 +80,17 @@ class FrontendController extends Controller
     }
     public function loginSubmit(Request $request)
     {
-        $data = $request->all();
+         $data = $request->all();
+        // $email = $request->email;
+        // $password = md5($request->password);
+        // $obj = User::where('email', '=', $email)
+        // ->where('password', '=', $password)
+        // ->first();
         if (Auth::attempt(['email' => $data['email'], 'password' => $data['password'], 'status' => 'active'])) {
-            Session::put('user', $data['email']);
+             Session::put('user', $data['email']);
+            // $request->session()->put('userid', $obj->id);
+            // $request->session()->put('name', $obj->name);
+            // $request->session()->put('email', $obj->email);
             request()->session()->flash('success', 'Successfully login');
             return redirect()->route('home');
         } else {

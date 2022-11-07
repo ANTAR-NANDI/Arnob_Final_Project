@@ -40,9 +40,10 @@
           </tr>
         </tfoot>
         <tbody>
+          <?php $sl = 0; ?>
           @foreach($users as $user)
           <tr>
-            <td>{{$user->id}}</td>
+            <td>{{++$sl}}</td>
             <td>{{$user->name}}</td>
             <td>{{$user->email}}</td>
             <td>

@@ -168,8 +168,8 @@
                                         @php
                                         $after_discount=($product->price-($product->price*$product->discount)/100);
                                         @endphp
-                                        <span>${{number_format($after_discount,2)}}</span>
-                                        <del style="padding-left:4%;">${{number_format($product->price,2)}}</del>
+                                        <span>TK {{number_format($after_discount,2)}}</span>
+                                        <del style="padding-left:4%;">TK {{number_format($product->price,2)}}</del>
                                     </div>
                                 </div>
                             </div>
@@ -192,31 +192,31 @@
     $featured=DB::table('products')->where('is_featured',1)->where('status','active')->orderBy('id','DESC')->limit(1)->get();
 @endphp --}}
 <!-- Start Midium Banner  -->
-<section class="midium-banner">
+<!-- <section class="midium-banner">
     <div class="container">
         <div class="row">
             @if($featured)
-            @foreach($featured as $data)
-            <!-- Single Banner  -->
-            <div class="col-lg-6 col-md-6 col-12">
-                <div class="single-banner">
-                    <!-- @php
+            @foreach($featured as $data) -->
+<!-- Single Banner  -->
+<!-- <div class="col-lg-6 col-md-6 col-12">
+                <div class="single-banner"> -->
+<!-- @php
                     $photo=explode(',',$data->photo);
                     @endphp -->
-                    <img src="{{asset('/uploads/images/products'). '/' . $data->photo}}" alt="">
+<!-- <img src="{{asset('/uploads/images/products'). '/' . $data->photo}}" alt="">
                     <div class="content">
                         <p>{{$data->cat_info['title']}}</p>
                         <h3>{{$data->title}} <br>Up to<span> {{$data->discount}}%</span></h3>
                         <a href="{{route('product-detail',$data->slug)}}">Shop Now</a>
                     </div>
                 </div>
-            </div>
-            <!-- /End Single Banner  -->
-            @endforeach
+            </div> -->
+<!-- /End Single Banner  -->
+<!-- @endforeach
             @endif
         </div>
     </div>
-</section>
+</section> -->
 <!-- End Midium Banner -->
 
 <!-- Start Most Popular -->
@@ -259,11 +259,11 @@
                         <div class="product-content">
                             <h3><a href="{{route('product-detail',$product->slug)}}">{{$product->title}}</a></h3>
                             <div class="product-price">
-                                <span class="old">${{number_format($product->price,2)}}</span>
+                                <span class="old">TK {{number_format($product->price,2)}}</span>
                                 @php
                                 $after_discount=($product->price-($product->price*$product->discount)/100)
                                 @endphp
-                                <span>${{number_format($after_discount,2)}}</span>
+                                <span>TK {{number_format($after_discount,2)}}</span>
                             </div>
                         </div>
                     </div>
@@ -311,7 +311,7 @@
                                 <div class="col-lg-6 col-md-6 col-12 no-padding">
                                     <div class="content">
                                         <h4 class="title"><a href="#">{{$product->title}}</a></h4>
-                                        <p class="price with-discount">${{number_format($product->discount,2)}}</p>
+                                        <p class="price with-discount">TK {{number_format($product->discount,2)}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -350,7 +350,7 @@
             @php
             $after_discount=($product->price-($product->price*$product->discount)/100)
             @endphp
-            <h1 class="price">${{number_format($after_discount)}} <s>${{number_format($data->price)}}</s></h1>
+            <h1 class="price">TK {{number_format($after_discount)}} <s>TK {{number_format($data->price)}}</s></h1>
             <div class="coming-time">
                 <div class="clearfix" data-countdown="2021/02/30"></div>
             </div>
@@ -507,7 +507,7 @@
                             @php
                             $after_discount=($product->price-($product->price*$product->discount)/100);
                             @endphp
-                            <h3><small><del class="text-muted">${{number_format($product->price,2)}}</del></small> ${{number_format($after_discount,2)}} </h3>
+                            <h3><small><del class="text-muted">TK {{number_format($product->price,2)}}</del></small> TK {{number_format($after_discount,2)}} </h3>
                             <div class="quickview-peragraph">
                                 <p>{!! html_entity_decode($product->summary) !!}</p>
                             </div>

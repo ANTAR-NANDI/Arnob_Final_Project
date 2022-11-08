@@ -88,7 +88,7 @@ Route::group(['prefix' => '/admin'], function () {
 
 
 # Final Section Routes Starts From Here #  # Final Section Routes Starts From Here #     # Final Section Routes Starts From Here #
-//Admin Section Routes Finalized
+//Admin Sect ion Routes Finalized
 Route::group(['middleware'=>'admin'], function(){
 Route::group(
     ['prefix' => '/admin'],

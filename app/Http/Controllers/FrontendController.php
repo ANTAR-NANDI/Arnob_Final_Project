@@ -13,6 +13,7 @@ use App\Models\Brand;
 use App\Models\User;
 use Auth;
 use Session;
+use App\Models\Admin;
 use Newsletter;
 use DB;
 use Hash;

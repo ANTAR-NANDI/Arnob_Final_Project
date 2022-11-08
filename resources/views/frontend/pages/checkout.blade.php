@@ -105,6 +105,17 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div id="bkash_div" style="display: none;" class="col-lg-6 col-md-6 col-12">
+                                <div class="form-group">
+                                    <label>Bkash ID</label>
+                                    <input type="text" name="payment_id" placeholder="" value="{{old('payment_id')}}">
+                                    @error('payment_id')
+                                    <span class='text-danger'>{{$message}}</span>
+                                    @enderror
+                                </div>
+                            </div>
+
+
 
                         </div>
                         <!--/ End Form -->
@@ -158,7 +169,7 @@
                                     {{-- <label class="checkbox-inline" for="1"><input name="updates" id="1" type="checkbox"> Check Payments</label> --}}
                                     <form-group>
                                         <input name="payment_method" type="radio" value="cod"> <label> Cash On Delivery</label><br>
-                                        <input name="payment_method" type="radio" value="paypal"> <label> PayPal</label>
+                                        <input name="payment_method" type="radio" value="bkash"> <label> Bkash</label>
                                     </form-group>
 
                                 </div>
@@ -314,9 +325,19 @@
     $(document).ready(function() {
         $("select.select2").select2();
     });
+
     $('select.nice-select').niceSelect();
 </script>
 <script>
+    $("input[name$='payment_method']").click(function() {
+        var test = $(this).val();
+        if (test == "bkash") {
+            $("#bkash_div").show();
+        } else {
+            $("#bkash_div").hide();
+        }
+    });
+
     function showMe(box) {
         var checkbox = document.getElementById('shipping').style.display;
         // alert(checkbox);

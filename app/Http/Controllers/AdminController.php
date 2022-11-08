@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Setting;
 use App\Models\User;
+use App\Admin;
 use App\Rules\MatchOldPassword;
 use Hash;
 use Image;

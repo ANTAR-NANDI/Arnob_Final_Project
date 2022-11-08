@@ -56,6 +56,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->payment_id);
         $this->validate($request, [
             'first_name' => 'string|required',
             'last_name' => 'string|required',
@@ -105,6 +106,7 @@ class OrderController extends Controller
         $order_data['order_number'] = 'ORD-' . strtoupper(Str::random(10));
         $order_data['user_id'] = $request->user()->id;
         $order_data['shipping_id'] = $request->shipping;
+        $order_data['payment_id'] = $request->payment_id;
         $shipping = Shipping::where('id', $order_data['shipping_id'])->pluck('price');
         // return session('coupon')['value'];
         $order_data['sub_total'] = Helper::totalCartPrice();
@@ -127,13 +129,16 @@ class OrderController extends Controller
         }
         // return $order_data['total_amount'];
         $order_data['status'] = "new";
-        if (request('payment_method') == 'paypal') {
-            $order_data['payment_method'] = 'paypal';
+        if (request('payment_method') == 'bkash') {
+            $order_data['payment_method'] = 'bkash';
             $order_data['payment_status'] = 'paid';
+            // $order_data['payment_id'] = $request->payment_id;;
         } else {
             $order_data['payment_method'] = 'cod';
             $order_data['payment_status'] = 'Unpaid';
         }
+        // dd($order_data);
+
         $order->fill($order_data);
         $status = $order->save();
         if ($order)
@@ -169,7 +174,6 @@ class OrderController extends Controller
         $order = Order::find($id);
         // return $order;
         return view('backend.order.show')->with('order', $order);
-    
     }
 
     /**
@@ -266,7 +270,7 @@ class OrderController extends Controller
             return back();
         }
     }
-    
+
     public function incomeChart(Request $request)
     {
         $year = \Carbon\Carbon::now()->year;

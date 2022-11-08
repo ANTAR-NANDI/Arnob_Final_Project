@@ -51,6 +51,7 @@
           </tr>
         </tfoot>
         <tbody>
+          <?php $sl = 0; ?>
 
           @foreach($products as $product)
           @php
@@ -59,7 +60,7 @@
           $brands=DB::table('brands')->select('title')->where('id',$product->brand_id)->get();
           @endphp
           <tr>
-            <td>{{$product->id}}</td>
+            <td>{{++$sl}}</td>
             <td>{{$product->title}}</td>
             <td>{{$product->cat_info['title']}}
               <sub>

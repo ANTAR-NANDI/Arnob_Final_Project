@@ -36,10 +36,11 @@
             <th>Action</th>
           </tr>
         </tfoot>
+        <?php $sl = 0; ?>
         <tbody>
           @foreach($banners as $banner)
           <tr>
-            <td>{{$banner->id}}</td>
+            <td>{{++$sl}}</td>
             <td>{{$banner->title ? $banner->title : 'N\A' }}</td>
             <td>{{$banner->slug}}</td>
             <td>

@@ -89,6 +89,7 @@ Route::group(['prefix' => '/admin'], function () {
 
 # Final Section Routes Starts From Here #  # Final Section Routes Starts From Here #     # Final Section Routes Starts From Here #
 //Admin Section Routes Finalized
+Route::group(['middleware'=>'Admin'], function(){
 Route::group(
     ['prefix' => '/admin'],
     function () {
@@ -128,6 +129,7 @@ Route::group(
         Route::delete('/notification/{id}', [NotificationController::class, 'delete'])->name('notification.delete');
     }
 );
+});
 //User Section Finalized
 // User section start
 Route::group(

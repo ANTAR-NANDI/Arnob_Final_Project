@@ -40,12 +40,14 @@
           </tr>
         </tfoot>
         <tbody>
+          <?php $sl = 0; ?>
+
           @foreach($reviews as $review)
           @php
           $title=DB::table('products')->select('title')->where('id',$review->product_id)->get();
           @endphp
           <tr>
-            <td>{{$review->id}}</td>
+            <td>{{++$sl}}</td>
             <td>{{$review->user_info['name']}}</td>
             <td>@foreach($title as $data){{ $data->title}} @endforeach</td>
             <td>{{$review->review}}</td>

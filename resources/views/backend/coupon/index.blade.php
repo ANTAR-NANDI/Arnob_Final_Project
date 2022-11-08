@@ -26,6 +26,8 @@
             <th>Action</th>
           </tr>
         </thead>
+        <?php $sl = 0; ?>
+
         <tfoot>
           <tr>
             <th>S.N.</th>
@@ -39,7 +41,7 @@
         <tbody>
           @foreach($coupons as $coupon)
           <tr>
-            <td>{{$coupon->id}}</td>
+            <td>{{++$sl}}</td>
             <td>{{$coupon->code}}</td>
             <td>
               @if($coupon->type=='fixed')

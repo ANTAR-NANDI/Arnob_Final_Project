@@ -41,6 +41,7 @@
           </tr>
         </tfoot>
         <tbody>
+          <?php $sl = 0; ?>
 
           @foreach($categories as $category)
           @php
@@ -49,7 +50,7 @@
 
           @endphp
           <tr>
-            <td>{{$category->id}}</td>
+            <td>{{++$sl}}</td>
             <td>{{$category->title}}</td>
             <td>{{$category->slug}}</td>
             <td>{{(($category->is_parent==1)? 'Yes': 'No')}}</td>

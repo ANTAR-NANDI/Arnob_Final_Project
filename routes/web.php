@@ -67,14 +67,9 @@ Route::group(['prefix' => '/admin'], function () {
     Route::get('/file-manager', function () {
         return view('backend.layouts.file-manager');
     })->name('file-manager');
-    // Profile
-    Route::get('/profile', [AdminController::class, 'profile'])->name('admin-profile');
-    Route::post('/profile/{id}', [AdminController::class, 'profileUpdate'])->name('profile-update');
+
     // Ajax for sub category
     Route::post('/category/{id}/child', [CategoryController::class, 'getChildByParent']);
-    // Password Change
-    Route::get('change-password', [AdminController::class, 'changePassword'])->name('change.password.form');
-    Route::post('change-password', [AdminController::class, 'changPasswordStore'])->name('change.password');
 });
 
 
@@ -89,46 +84,52 @@ Route::group(['prefix' => '/admin'], function () {
 
 # Final Section Routes Starts From Here #  # Final Section Routes Starts From Here #     # Final Section Routes Starts From Here #
 //Admin Sect ion Routes Finalized
-Route::group(['middleware'=>'admin'], function(){
-Route::group(
-    ['prefix' => '/admin'],
-    function () {
-        Route::get('/', [AdminController::class, 'index'])->name('admin');
-        // Settings
-        Route::get('settings', [AdminController::class, 'settings'])->name('settings');
-        Route::post('setting/update', [AdminController::class, 'settingsUpdate'])->name('settings.update');
-        // user route
-        Route::resource('users', UsersController::class);
-        // Coupon
-        Route::resource('/coupon', CouponController::class);
-        // Banner
-        Route::resource('banner', BannerController::class);
-        // Category
-        Route::resource('/category', CategoryController::class);
-        // Product
-        Route::resource('/product', ProductController::class);
-        // Brand
-        Route::resource('brand', BrandController::class);
-        // Shipping
-        Route::resource('/shipping', ShippingController::class);
-        // Order in Admin Panel
-        Route::resource('/order', OrderController::class);
-        Route::get('order/pdf/{id}', [OrderController::class, 'pdf'])->name('order.pdf');
-        // Post
-        Route::resource('/post', PostController::class);
-        // POST category
-        Route::resource('/post-category', PostCategoryController::class);
-        // Post tag
-        Route::resource('/post-tag', PostTagController::class);
-        // Message
-        Route::resource('/message',  MessageController::class);
-        Route::get('/message/five', [MessageController::class, 'messageFive'])->name('messages.five');
-        // Notification
-        Route::get('/notification/{id}', [NotificationController::class, 'show'])->name('admin.notification');
-        Route::get('/notifications', [NotificationController::class, 'index'])->name('all.notification');
-        Route::delete('/notification/{id}', [NotificationController::class, 'delete'])->name('notification.delete');
-    }
-);
+Route::group(['middleware' => 'admin'], function () {
+    Route::group(
+        ['prefix' => '/admin'],
+        function () {
+            Route::get('/', [AdminController::class, 'index'])->name('admin');
+            // Settings
+            Route::get('settings', [AdminController::class, 'settings'])->name('settings');
+            Route::post('setting/update', [AdminController::class, 'settingsUpdate'])->name('settings.update');
+            // user route
+            Route::resource('users', UsersController::class);
+            // Coupon
+            Route::resource('/coupon', CouponController::class);
+            // Profile
+            Route::get('/profile', [AdminController::class, 'profile'])->name('admin-profile');
+            Route::post('/profile/{id}', [AdminController::class, 'profileUpdate'])->name('profile-update');
+            // Banner
+            Route::resource('banner', BannerController::class);
+            // Category
+            Route::resource('/category', CategoryController::class);
+            // Product
+            Route::resource('/product', ProductController::class);
+            // Brand
+            Route::resource('brand', BrandController::class);
+            // Shipping
+            Route::resource('/shipping', ShippingController::class);
+            // Order in Admin Panel
+            Route::resource('/order', OrderController::class);
+            Route::get('order/pdf/{id}', [OrderController::class, 'pdf'])->name('order.pdf');
+            // Post
+            Route::resource('/post', PostController::class);
+            // POST category
+            Route::resource('/post-category', PostCategoryController::class);
+            // Post tag
+            Route::resource('/post-tag', PostTagController::class);
+            // Password Change
+            Route::get('change-password', [AdminController::class, 'changePassword'])->name('change.password.form');
+            Route::post('change-password', [AdminController::class, 'changPasswordStore'])->name('achange.password');
+            // Message
+            Route::resource('/message',  MessageController::class);
+            Route::get('/message/five', [MessageController::class, 'messageFive'])->name('messages.five');
+            // Notification
+            Route::get('/notification/{id}', [NotificationController::class, 'show'])->name('admin.notification');
+            Route::get('/notifications', [NotificationController::class, 'index'])->name('all.notification');
+            Route::delete('/notification/{id}', [NotificationController::class, 'delete'])->name('notification.delete');
+        }
+    );
 });
 //User Section Finalized
 // User section start
@@ -187,16 +188,16 @@ Route::post('product/track/order', [OrderController::class, 'productTrackOrder']
 //Category of Products
 Route::get('/product-cat/{slug}', [FrontendController::class, 'productCat'])->name('product-cat');
 Route::get('/product-grids', [FrontendController::class, 'productGrids'])->name('product-grids');
-Route::get('/product-brand/{slug}', [FrontendController::class,'productBrand'])->name('product-brand');
+Route::get('/product-brand/{slug}', [FrontendController::class, 'productBrand'])->name('product-brand');
 // Product Review
 Route::resource('/review', ProductReviewController::class);
 // Post Comment 
-Route::post('post/{slug}/comment', [PostCommentController::class,'store'])->name('post-comment.store');
+Route::post('post/{slug}/comment', [PostCommentController::class, 'store'])->name('post-comment.store');
 Route::resource('/comment', PostCommentController::class);
 //Products
 Route::post('/product/search', [FrontendController::class, 'productSearch'])->name('product.search');
-Route::get('/product-lists', [FrontendController::class,'productLists'])->name('product-lists');
-Route::match(['get', 'post'], '/filter', [FrontendController::class,'productFilter'])->name('shop.filter');
+Route::get('/product-lists', [FrontendController::class, 'productLists'])->name('product-lists');
+Route::match(['get', 'post'], '/filter', [FrontendController::class, 'productFilter'])->name('shop.filter');
 Route::get('product-detail/{slug}', [FrontendController::class, 'productDetail'])->name('product-detail');
 // Wishlist
 Route::get('/wishlist', function () {
@@ -213,10 +214,10 @@ Route::get('/cart', function () {
 Route::post('cart-update', [CartController::class, 'cartUpdate'])->name('cart.update');
 Route::get('cart-delete/{id}', [CartController::class, 'cartDelete'])->name('cart-delete');
 // Coupon
-Route::post('/coupon-store', [CouponController::class,'couponStore'])->name('coupon-store');
+Route::post('/coupon-store', [CouponController::class, 'couponStore'])->name('coupon-store');
 //Checkout
 Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout')->middleware('user');
-Route::post('cart/order', [OrderController::class,'store'])->name('cart.order');
-Route::get('order/pdf/{id}', [OrderController::class,'pdf'])->name('order.pdf');
+Route::post('cart/order', [OrderController::class, 'store'])->name('cart.order');
+Route::get('order/pdf/{id}', [OrderController::class, 'pdf'])->name('order.pdf');
 // NewsLetter
 Route::post('/subscribe', [FrontendController::class, 'subscribe'])->name('subscribe');

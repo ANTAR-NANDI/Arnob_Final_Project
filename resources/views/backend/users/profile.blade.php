@@ -23,9 +23,9 @@
                 <div class="card">
                     <div class="image">
                         @if($profile->photo)
-                        <img class="card-img-top img-fluid roundend-circle mt-4" style="border-radius:50%;height:80px;width:80px;margin:auto;" src="{{$profile->photo}}" alt="profile picture">
+                        <img class="card-img-top img-fluid roundend-circle mt-4" style="border-radius:50%;height:80px;width:80px;margin:auto;" src="{{asset('/uploads/images/users'). '/' . $profile->photo}}" alt="profile picture">
                         @else
-                        <img src="{{asset('backend/img/avatar.png')}}" class="img-fluid rounded-circle" style="max-width:50px" alt="avatar.png">
+                        <img class="card-img-top img-fluid roundend-circle mt-4" style="border-radius:50%;height:80px;width:80px;margin:auto;" src="{{asset('backend/img/avatar.png')}}" alt="profile picture">
                         @endif
                     </div>
                     <div class="card-body mt-4 ml-2">
@@ -36,7 +36,7 @@
                 </div>
             </div>
             <div class="col-md-8">
-                <form class="border px-4 pt-2 pb-3" method="POST" action="{{route('profile-update',$profile->id)}}">
+                <form class="border px-4 pt-2 pb-3" method="POST" action="{{route('profile-update',$profile->id)}}" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="inputTitle" class="col-form-label">Name</label>
@@ -55,15 +55,24 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="inputPhoto" class="col-form-label">Photo</label>
+                        <label for="inputPhoto" class="col-form-label">Photo <span class="text-danger">*</span></label>
                         <div class="input-group">
                             <span class="input-group-btn">
-                                <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
-                                    <i class="fa fa-picture-o"></i> Choose
-                                </a>
+                                <input type="file" id="user_image" name="photo" class="form-control" />
                             </span>
-                            <input id="thumbnail" class="form-control" type="text" name="photo" value="{{$profile->photo}}">
+
                         </div>
+                        <div class="col-md-12 mb-2">
+                            <img id="preview-image-before-upload" src="{{asset('backend/img/avatar.png')}}" alt="preview image" style="max-height: 250px;">
+                        </div>
+                        <div class="col-md-3">
+                            @if($profile->photo!=null)
+                            <span>Uploaded image <br /></span>
+                            <img width="100px" height="100px" src="{{asset('/uploads/images/users'). '/' . $profile->photo}}">
+                            @endif
+                        </div>
+                        <div id="holder" style="margin-top:15px;max-height:100px;"></div>
+
                         @error('photo')
                         <span class="text-danger">{{$message}}</span>
                         @enderror
@@ -135,6 +144,17 @@
 @push('scripts')
 <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
 <script>
-    $('#lfm').filemanager('image');
+    $('#user_image').change(function() {
+
+        let reader = new FileReader();
+
+        reader.onload = (e) => {
+
+            $('#preview-image-before-upload').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(this.files[0]);
+
+    });
 </script>
 @endpush

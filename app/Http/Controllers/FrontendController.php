@@ -58,6 +58,7 @@ class FrontendController extends Controller
         // dd($data);
         $check = $this->create($data);
         Session::put('user', $data['email']);
+        Session::put('name', $data['name']);
         if ($check) {
             request()->session()->flash('success', 'Successfully registered');
             return redirect()->route('home');
@@ -94,10 +95,12 @@ class FrontendController extends Controller
 
     public function logout()
     {
-        Session::forget('user');
-        Auth::logout();
-        request()->session()->flash('success', 'Logout successfully');
-        return back();
+        // Session::forget('user');
+        // Auth::logout();
+        // request()->session()->flash('success', 'Logout successfully');
+        // return back();
+        Session::flush();
+        return redirect()->to('/');
     }
     public function aboutUs()
     {

@@ -21,6 +21,7 @@
                     <!-- Top Right -->
                     <div class="right-content">
                         <ul class="list-main">
+                            <!-- <h4>{{ Session::get('user') }}</h4> -->
                             {{-- <li><i class="ti-alarm-clock"></i> <a href="#">Daily deal</a></li> --}}
                             @auth
                             @if(Auth::user()->role=='admin')

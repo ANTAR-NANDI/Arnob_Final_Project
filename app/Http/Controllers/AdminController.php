@@ -74,7 +74,71 @@ class AdminController extends Controller
     public function profile()
     {
         $profile = Auth()->user();
+        // dd($profile);
         // return $profile;
         return view('backend.users.profile')->with('profile', $profile);
+    }
+    public function profileUpdate(Request $request, $id)
+    {
+        // return $request->all();
+        // $user = User::findOrFail($id);
+        // $data = $request->all();
+        // $status = $user->fill($data)->save();
+        // if ($status) {
+        //     request()->session()->flash('success', 'Successfully updated your profile');
+        // } else {
+        //     request()->session()->flash('error', 'Please try again!');
+        // }
+        // return redirect()->back();
+        $user = User::findOrFail($id);
+        //dd($user);
+        $user->name = $request->name;
+        $user->role = $request->role;
+        if ($request->hasfile('photo')) {
+            //dd("Test");
+            if ($user->photo != null) {
+                if (file_exists(public_path() . '/uploads/thumbnail/users/' . $user->photo)) {
+                    unlink(public_path() . '/uploads/thumbnail/users/' . $user->photo);
+                }
+                if (file_exists(public_path() . '/uploads/images/users/' . $user->photo)) {
+                    unlink(public_path() . '/uploads/images/users/' . $user->photo);
+                }
+            }
+            $originalImage = $request->file('photo');
+            //dd($originalImage);
+            $thumbnailImage = Image::make($originalImage);
+            $time = time();
+            $thumbnailPath = public_path() . '/uploads/images/users/';
+            $originalPath = public_path() . '/uploads/thumbnail/users/';
+            $thumbnailImage->save($originalPath . $time . $originalImage->getClientOriginalName());
+            $thumbnailImage->resize(150, 150);
+            $thumbnailImage->save($thumbnailPath . $time . $originalImage->getClientOriginalName());
+            $user->photo = $time . $originalImage->getClientOriginalName();
+        }
+        //dd($request);
+        $status = $user->save();
+        if ($status) {
+            request()->session()->flash('success', 'Successfully updated your profile');
+        } else {
+            request()->session()->flash('error', 'Please try again!');
+        }
+        return redirect()->back();
+    }
+    public function changePassword()
+    {
+        return view('backend.layouts.changePassword');
+    }
+    public function changPasswordStore(Request $request)
+    {
+        //dd("test");
+        $request->validate([
+            'current_password' => ['required', new MatchOldPassword],
+            'new_password' => ['required'],
+            'new_confirm_password' => ['same:new_password'],
+        ]);
+
+        User::find(auth()->user()->id)->update(['password' => Hash::make($request->new_password)]);
+
+        return redirect()->route('admin')->with('success', 'Password successfully changed');
     }
 }

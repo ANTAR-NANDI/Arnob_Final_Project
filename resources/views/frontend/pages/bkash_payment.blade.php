@@ -46,7 +46,7 @@
                             <div style="display: none;" class="col-lg-6 col-md-6 col-12">
                                 <div class="form-group">
                                     <label>Ammount<span>*</span></label>
-                                    <input type="number" name="total_rate" placeholder="" value="{{ $order->total_amount}}">
+                                    <input type="number" name="total_amount" placeholder="" value="{{ $order->total_amount}}">
                                     <input type="number" name="id" placeholder="" value="{{ $order->id}}" value="{{old('id')}}">
                                     @error('total_rate')
                                     <span class='text-danger'>{{$message}}</span>

@@ -179,7 +179,7 @@ class OrderController extends Controller
     public function bkash_checkout(Request $request)
     {
         //dd($_POST);
-        if ($request->amount < $request->total_rate) {
+        if ($request->amount < $request->total_amount) {
             session()->forget('cart');
             $order = Order::find($request->id);
             $status = $order->delete();
@@ -188,6 +188,8 @@ class OrderController extends Controller
                 return redirect()->back();
             }
         } else {
+            session()->forget('cart');
+            Order::where('user_id', auth()->user()->id)->where('id', $request->id)->update(['payment_id' => $request->txrx_id]);
             request()->session()->flash('success', 'Your product successfully placed in order');
             return redirect()->route('home');
         }

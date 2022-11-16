@@ -60,8 +60,8 @@
             <td>{{$order->quantity}}</td>
             <td>@foreach($shipping_charge as $data) TK {{number_format($data,2)}} @endforeach</td>
             <td>TK {{number_format($order->total_amount,2)}}</td>
-            <td>TK {{$order->payment_method}}</td>
-            <td>TK {{$order->payment_id}}</td>
+            <td> {{$order->payment_method}}</td>
+            <td> {{$order->payment_id}}</td>
 
             <td>
               @if($order->status=='new')

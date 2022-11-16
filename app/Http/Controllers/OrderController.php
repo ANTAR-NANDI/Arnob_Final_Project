@@ -6,6 +6,7 @@ use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Shipping;
 use App\Models\User;
+use Session;
 use PDF;
 use App\Models\Notification;
 use Helper;
@@ -56,7 +57,8 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->payment_id);
+        // dd($request->payment_method);
+
         $this->validate($request, [
             'first_name' => 'string|required',
             'last_name' => 'string|required',
@@ -106,7 +108,7 @@ class OrderController extends Controller
         $order_data['order_number'] = 'ORD-' . strtoupper(Str::random(10));
         $order_data['user_id'] = $request->user()->id;
         $order_data['shipping_id'] = $request->shipping;
-        $order_data['payment_id'] = $request->payment_id;
+        // $order_data['payment_id'] = $request->payment_id;
         $shipping = Shipping::where('id', $order_data['shipping_id'])->pluck('price');
         // return session('coupon')['value'];
         $order_data['sub_total'] = Helper::totalCartPrice();
@@ -158,9 +160,37 @@ class OrderController extends Controller
         }
         Cart::where('user_id', auth()->user()->id)->where('order_id', null)->update(['order_id' => $order->id]);
 
-        // dd($users);        
-        request()->session()->flash('success', 'Your product successfully placed in order');
-        return redirect()->route('home');
+        // dd($users);
+        if ($request->payment_method == "bkash") {
+            $request->session()->put('order_id', $order->id);
+            return redirect()->route('bkash_payment');
+        } else {
+            request()->session()->flash('success', 'Your product successfully placed in order');
+            return redirect()->route('home');
+        }
+    }
+    public function payment()
+    {
+        $order_id = Session::get('order_id');
+        $order = Order::find($order_id);
+        // dd($order);
+        return view('frontend.pages.bkash_payment')->with('order', $order);;
+    }
+    public function bkash_checkout(Request $request)
+    {
+        //dd($_POST);
+        if ($request->amount < $request->total_rate) {
+            session()->forget('cart');
+            $order = Order::find($request->id);
+            $status = $order->delete();
+            if ($status) {
+                request()->session()->flash('error', 'Your Order didnt placed !! Payment value is not correct !1');
+                return redirect()->back();
+            }
+        } else {
+            request()->session()->flash('success', 'Your product successfully placed in order');
+            return redirect()->route('home');
+        }
     }
 
     /**

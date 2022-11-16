@@ -221,3 +221,8 @@ Route::post('cart/order', [OrderController::class, 'store'])->name('cart.order')
 Route::get('order/pdf/{id}', [OrderController::class, 'pdf'])->name('order.pdf');
 // NewsLetter
 Route::post('/subscribe', [FrontendController::class, 'subscribe'])->name('subscribe');
+
+// Route::get('bkash_payment', 'PayPalController@payment')->name('bkash_payment');
+Route::get('bkash_payment', [OrderController::class, 'payment'])->name('bkash_payment');
+Route::post('/bkash_checkout', [OrderController::class, 'bkash_checkout'])->name('bkash_checkout');
+

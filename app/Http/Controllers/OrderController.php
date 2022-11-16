@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\Shipping;
 use App\Models\User;
 use Session;
+use App\Models\Setting;
 use PDF;
 use App\Models\Notification;
 use Helper;
@@ -172,9 +173,10 @@ class OrderController extends Controller
     public function payment()
     {
         $order_id = Session::get('order_id');
+        $setting = Setting::first();
         $order = Order::find($order_id);
-        // dd($order);
-        return view('frontend.pages.bkash_payment')->with('order', $order);;
+        //dd($setting);
+        return view('frontend.pages.bkash_payment', ['order' => $order], ['setting' => $setting]);
     }
     public function bkash_checkout(Request $request)
     {

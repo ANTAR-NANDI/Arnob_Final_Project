@@ -24,6 +24,9 @@
             <th>Quantity</th>
             <th>Shipping Charge</th>
             <th>Total Amount</th>
+            <th>Payment TYpe</th>
+<th>Transaction ID</th>
+
             <th>Status</th>
             <th>Action</th>
           </tr>
@@ -37,6 +40,8 @@
             <th>Quantity</th>
             <th>Shipping Charge</th>
             <th>Total Amount</th>
+            <th>Payment TYpe</th>
+<th>Transaction ID</th>
             <th>Status</th>
             <th>Action</th>
           </tr>
@@ -55,6 +60,9 @@
             <td>{{$order->quantity}}</td>
             <td>@foreach($shipping_charge as $data) TK {{number_format($data,2)}} @endforeach</td>
             <td>TK {{number_format($order->total_amount,2)}}</td>
+            <td>TK {{$order->payment_method}}</td>
+            <td>TK {{$order->payment_id}}</td>
+
             <td>
               @if($order->status=='new')
               <span class="badge badge-primary">{{$order->status}}</span>

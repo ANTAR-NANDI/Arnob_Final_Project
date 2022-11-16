@@ -83,6 +83,7 @@
                     <div class="order-details">
 
                         <!--/ End Order Widget -->
+                        <h2>{{ $setting->phone}}</h2>
                         <!-- Payment Method Widget -->
                         <div class="single-widget payement">
                             <div class="content">

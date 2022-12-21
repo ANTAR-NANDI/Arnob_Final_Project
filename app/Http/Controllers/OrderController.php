@@ -8,6 +8,9 @@ use App\Models\Shipping;
 use App\Models\User;
 use Session;
 use App\Models\Setting;
+use Exception;
+
+use Twilio\Rest\Client;
 use PDF;
 use App\Models\Notification;
 use Helper;
@@ -168,9 +171,35 @@ class OrderController extends Controller
             return redirect()->route('bkash_payment');
         } else {
             $request->session()->put('order_id', $order->id);
+            $order_id = Session::get('order_id');
+            $order = Order::find($order_id);
+           $receiverNumber = "+8801851726578";
+            $otp = mt_rand(100000, 999999);
+        $message = "Your Otp is  ". $otp;
+
+        try {
+
+            $account_sid = getenv("TWILIO_SID");
+            $auth_token = getenv("TWILIO_TOKEN");
+            $twilio_number = getenv("TWILIO_FROM");
+
+            $client = new Client($account_sid, $auth_token);
+            $client->messages->create($receiverNumber, [
+                'from' => $twilio_number,
+                'body' => $message
+            ]);
+            return response()->json([
+                'status' => 200,
+                'success' => 'Pharma Added Successfully'
+            ]);
+
+            //dd('SMS Sent Successfully.');
+        } catch (Exception $e) {
+            dd("Error: " . $e->getMessage());
+        }
             return redirect()->route('otp');
-            request()->session()->flash('success', 'Your product successfully placed in order');
-            return redirect()->route('home');
+            // request()->session()->flash('success', 'Your product successfully placed in order');
+            // return redirect()->route('home');
         }
     }
     public function payment()
@@ -232,7 +261,7 @@ class OrderController extends Controller
         curl_close($ch);
 
         //dd($order);
-        return view('frontend.pages.otp', ['order' => $order,'otp' => $otp]);
+        return view('frontend.pages.otp', ['order' => $order, 'otp' => $otp]);
     }
     public function otp_confirmation(Request $request)
     {

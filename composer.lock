@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f72893301b0394bf3741e787d6527cce",
+    "content-hash": "9d8114f61c5fb58c060cfa9c413f04bb",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1110,6 +1110,67 @@
                 }
             ],
             "time": "2021-12-16T16:49:26+00:00"
+        },
+        {
+            "name": "iqbalhasandev/laravel-bulksmsbd",
+            "version": "V2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/iqbalhasandev/laravel-bulksmsbd.git",
+                "reference": "9ddc887a9a927287f8159a610d68b66ecbd98156"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/iqbalhasandev/laravel-bulksmsbd/zipball/9ddc887a9a927287f8159a610d68b66ecbd98156",
+                "reference": "9ddc887a9a927287f8159a610d68b66ecbd98156",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "iqbalhasandev\\bulksmsbd\\BulkSMSBDServiceProvider"
+                    ],
+                    "aliases": []
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "iqbalhasandev\\bulksmsbd\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "IQBAL HASAN",
+                    "email": "iqbalhasan.dev@gmail.com"
+                }
+            ],
+            "description": "Integrate SMS system into your project easily with bulk sms bd's API via this plugin.",
+            "keywords": [
+                "bulksms",
+                "bulksmsbd",
+                "laravel-bulksms",
+                "laravel-bulksmsbd",
+                "laravel-package",
+                "laravel-plugin",
+                "laravel-sms-gateway",
+                "library",
+                "package",
+                "plugin",
+                "sms-api"
+            ],
+            "support": {
+                "issues": "https://github.com/iqbalhasandev/laravel-bulksmsbd/issues",
+                "source": "https://github.com/iqbalhasandev/laravel-bulksmsbd/tree/V2.1"
+            },
+            "time": "2020-11-08T03:11:31+00:00"
         },
         {
             "name": "laravel/framework",
@@ -5241,6 +5302,55 @@
             "time": "2021-12-08T09:12:39+00:00"
         },
         {
+            "name": "twilio/sdk",
+            "version": "6.44.0",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:twilio/twilio-php.git",
+                "reference": "d0f8b4c642209a08066990eaea55ee6f292e4f8d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twilio/twilio-php/zipball/d0f8b4c642209a08066990eaea55ee6f292e4f8d",
+                "reference": "d0f8b4c642209a08066990eaea55ee6f292e4f8d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "require-dev": {
+                "guzzlehttp/guzzle": "^6.3 || ^7.0",
+                "phpunit/phpunit": ">=7.0"
+            },
+            "suggest": {
+                "guzzlehttp/guzzle": "An HTTP client to execute the API requests"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Twilio\\": "src/Twilio/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Twilio API Team",
+                    "email": "api@twilio.com"
+                }
+            ],
+            "description": "A PHP wrapper for Twilio's API",
+            "homepage": "https://github.com/twilio/twilio-php",
+            "keywords": [
+                "api",
+                "sms",
+                "twilio"
+            ],
+            "time": "2022-12-14T22:22:57+00:00"
+        },
+        {
             "name": "vlucas/phpdotenv",
             "version": "v5.4.1",
             "source": {
@@ -7970,5 +8080,5 @@
         "php": "^7.3|^8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.3.0"
 }

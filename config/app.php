@@ -162,6 +162,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        iqbalhasandev\bulksmsbd\BulkSMSBDServiceProvider::class,
 
 
         /*

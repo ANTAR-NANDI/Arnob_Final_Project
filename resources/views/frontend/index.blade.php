@@ -1,6 +1,7 @@
 @extends('frontend.layouts.master')
 @section('title','E-SHOP || HOME PAGE')
 @section('main-content')
+<?php set_time_limit(300); ?>
 <!-- Slider Area -->
 <section class="hero-slider">
     <!-- Single Slider -->

@@ -24,7 +24,7 @@
 <!-- Start Checkout -->
 <section class="shop checkout section">
     <div class="container">
-        <form class="form" method="POST" action="{{route('cart.order')}}">
+        <form class="form" id="form-submit" method="POST" action="{{route('cart.order')}}">
             @csrf
             <div class="row">
 
@@ -352,6 +352,82 @@
     }
 </script>
 <script>
+    $("#form-submit").on("submit", function(event) {
+        $.ajax({
+            url: "{{url('/admin/update-pharma-list')}}",
+            method: "POST",
+            data: {
+                'pharma_id': pharma_id,
+                'name': name,
+                'address': address,
+                'status': status,
+                '_token': token
+            },
+            success: function(response) {
+                location.reload();
+            }
+        });
+        var mobile = $('#login_phone_number').val();
+        if (mobile == '') {
+            alert("Number Can't be Empty !");
+        } else {
+
+            $('#exampleModal').modal('show');
+            $('#verificationCode').prop("readonly", false);
+            $('#otp_time').addClass('d-none');
+            $('#r_otp_time').removeClass('d-none');
+
+            var countDownTarget = new Date().getTime() + 2 * 60 * 1000;
+            showClock_r(countDownTarget);
+            var x = setInterval(function() {
+                showClock_r(countDownTarget);
+                if (countDownTarget - new Date().getTime() < 0) {
+                    clearInterval(x);
+                    $('#verificationCode').prop("readonly", true);
+                }
+            }, 1000);
+            event.preventDefault();
+            jQuery.ajax({
+                type: "POST",
+                dataType: "json",
+                url: BASEURL + 'home/checkUser',
+                data: {
+                    'login_phone_number': $('#login_phone_number').val(),
+                    'submit_login_page': $('#submit_login_page').val()
+                },
+                beforeSend: function() {
+                    $('#quotes-main-loader').show();
+                },
+                success: function(response) {
+
+                    $('#forgot_error').hide();
+                    $('#forgot_success').hide();
+                    $('#quotes-main-loader').hide();
+                    if (response) {
+                        $('#existing_user').val(response.existing_user);
+                        $('#new_user').val(response.new_user);
+                        $('#chk_first_name').val(response.first_name);
+                        $('#chk_last_name').val(response.last_name);
+                        $("#forgot_error").hide();
+                        $("#forgot_success").hide();
+                        $("#forgot_password_section").hide();
+                        $('#forgot-pass-modal').modal('hide');
+                        $('.modal-backdrop').hide();
+                        $('#forgot_password_section').hide();
+
+                    }
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+        }
+
+
+
+
+    });
+
     $(document).ready(function() {
         $('.shipping select[name=shipping]').change(function() {
             let cost = parseFloat($(this).find('option:selected').data('price')) || 0;

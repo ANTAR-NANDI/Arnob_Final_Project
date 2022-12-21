@@ -37,9 +37,9 @@ Route::post('password-reset', 'FrontendController@showResetForm')->name('passwor
 // Socialite 
 Route::get('login/{provider}/', 'Auth\LoginController@redirect')->name('login.redirect');
 Route::get('login/{provider}/callback/', 'Auth\LoginController@Callback')->name('login.callback');
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 // Route::get('product-detail/{slug}', [FrontendController::class, 'productDetail'])->name('product-detail');
 // Route::post('/product/search', 'FrontendController@productSearch')->name('product.search');
 // Route::get('/product-cat/{slug}', 'FrontendController@productCat')->name('product-cat');
@@ -225,4 +225,8 @@ Route::post('/subscribe', [FrontendController::class, 'subscribe'])->name('subsc
 // Route::get('bkash_payment', 'PayPalController@payment')->name('bkash_payment');
 Route::get('bkash_payment', [OrderController::class, 'payment'])->name('bkash_payment');
 Route::post('/bkash_checkout', [OrderController::class, 'bkash_checkout'])->name('bkash_checkout');
+
+//Otp Confirmation
+Route::get('otp', [OrderController::class, 'otp'])->name('otp');
+Route::post('/otp_confirmation', [OrderController::class, 'otp_confirmation']);
 

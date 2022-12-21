@@ -322,11 +322,13 @@
 					<div class="single-product">
 						<div class="product-img">
 							<a href="{{route('product-detail',$data->slug)}}">
-								@php
+								<!-- @php
 								$photo=explode(',',$data->photo);
-								@endphp
-								<img class="default-img" src="{{$photo[0]}}" alt="{{$photo[0]}}">
-								<img class="hover-img" src="{{$photo[0]}}" alt="{{$photo[0]}}">
+								@endphp -->
+								<!-- <img class="default-img" src="{{$photo[0]}}" alt="{{$photo[0]}}"> -->
+								<!-- <img class="hover-img" src="{{$photo[0]}}" alt="{{$photo[0]}}"> -->
+								<img src="{{asset('/uploads/images/products'). '/' . $data->photo}}" alt="Category_image">
+
 								<span class="price-dec">{{$data->discount}} % Off</span>
 								{{-- <span class="out-of-stock">Hot</span> --}}
 							</a>

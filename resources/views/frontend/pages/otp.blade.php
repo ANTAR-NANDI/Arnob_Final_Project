@@ -1,6 +1,6 @@
 @extends('frontend.layouts.master')
 
-@section('title','Checkout page')
+@section('title','OTP Confirmation Page')
 
 @section('main-content')
 
@@ -24,78 +24,55 @@
 <!-- Start Checkout -->
 <section class="shop checkout section">
     <div class="container">
-        <form class="form" method="POST" action="{{route('bkash_checkout')}}">
+        <form class="form" method="POST" action="{{route('otp_confirmation')}}">
             @csrf
             <div class="row">
 
                 <div class="col-lg-8 col-12">
                     <div class="checkout-form">
-                        <h2>Make Your Payment Here</h2>
-                        <p>Please register in order to checkout more quickly</p>
+                        <h2>Enter Your OTP Here</h2>
+                        <!-- <p>Please register in order to checkout more quickly</p> -->
                         <!-- Form -->
                         <div class="row">
+
+
                             <div class="col-lg-6 col-md-6 col-12">
                                 <div class="form-group">
-                                    <label>Payable Amount<span>*</span></label>
-                                    <input type="number" name="amount" placeholder="" value="{{old('amount')}}" value="{{old('amount')}}">
-                                    @error('amount')
-                                    <span class='text-danger'>{{$message}}</span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div style="display: none;" class="col-lg-6 col-md-6 col-12">
-                                <div class="form-group">
-                                    <label>Ammount<span>*</span></label>
-                                    <input type="number" name="total_amount" placeholder="" value="{{ $order->total_amount}}">
-                                    <input type="number" name="id" placeholder="" value="{{ $order->id}}" value="{{old('id')}}">
-                                    @error('total_rate')
-                                    <span class='text-danger'>{{$message}}</span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-12">
-                                <div class="form-group">
-                                    <label>Mobile Number<span>*</span></label>
-                                    <input type="text" name="mobile" placeholder="" value="{{old('mobile')}}">
+                                    <label>Enter OtP</label><span>*</span></label>
+                                    <input type="text" name="otp" placeholder="" value="">
                                     @error('mobile')
                                     <span class='text-danger'>{{$message}}</span>
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-12">
-                                <div class="form-group">
-                                    <label>Transaction ID<span>*</span></label>
-                                    <input type="text" name="txrx_id" placeholder="" value="{{old('txrx_id')}}">
-                                    @error('txrx_id')
-                                    <span class='text-danger'>{{$message}}</span>
-                                    @enderror
+                        </div>
+                        <div class="row">
+
+
+
+                            <div class="col-lg-4 col-12">
+                                <div class="order-details">
+
+
+
+                                    <!--/ End Payment Method Widget -->
+                                    <!-- Button Widget -->
+                                    <div class="single-widget get-button">
+                                        <div class="content">
+                                            <div class="button">
+                                                <button type="submit" class="btn">proceed</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/ End Button Widget -->
                                 </div>
                             </div>
-
-
-
 
                         </div>
                         <!--/ End Form -->
                     </div>
                 </div>
-                <div class="col-lg-4 col-12">
-                    <div class="order-details">
 
-                       
-
-                        <!--/ End Payment Method Widget -->
-                        <!-- Button Widget -->
-                        <div class="single-widget get-button">
-                            <div class="content">
-                                <div class="button">
-                                    <button type="submit" class="btn">proceed to checkout</button>
-                                </div>
-                            </div>
-                        </div>
-                        <!--/ End Button Widget -->
-                    </div>
-                </div>
             </div>
         </form>
     </div>

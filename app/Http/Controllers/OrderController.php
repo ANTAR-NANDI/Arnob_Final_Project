@@ -170,36 +170,41 @@ class OrderController extends Controller
             $request->session()->put('order_id', $order->id);
             return redirect()->route('bkash_payment');
         } else {
-            $request->session()->put('order_id', $order->id);
-            $order_id = Session::get('order_id');
-            $order = Order::find($order_id);
-           $receiverNumber = "+8801851726578";
-            $otp = mt_rand(100000, 999999);
-        $message = "Your Otp is  ". $otp;
+            // $request->session()->put('order_id', $order->id);
+            // $order_id = Session::get('order_id');
+            // $order = Order::find($order->id);
+            // $otp = mt_rand(100000, 999999);
+            // $url = "https://bulksmsbd.net/api/smsapi";
+            // $api_key = "Ez4D3wps4noSSXEolrYw";
+            // $senderid = "8809617611096";
+            // $number =
+            // "88" . $order->phone;
 
-        try {
+            // $message = "Your Order Verification Code is " . $otp;
 
-            $account_sid = getenv("TWILIO_SID");
-            $auth_token = getenv("TWILIO_TOKEN");
-            $twilio_number = getenv("TWILIO_FROM");
+            // $data = [
+            //     "api_key" => $api_key,
+            //     "senderid" => $senderid,
+            //     "number" => $number,
+            //     "message" => $message
+            // ];
 
-            $client = new Client($account_sid, $auth_token);
-            $client->messages->create($receiverNumber, [
-                'from' => $twilio_number,
-                'body' => $message
-            ]);
-            return response()->json([
-                'status' => 200,
-                'success' => 'Pharma Added Successfully'
-            ]);
 
-            //dd('SMS Sent Successfully.');
-        } catch (Exception $e) {
-            dd("Error: " . $e->getMessage());
-        }
-            return redirect()->route('otp');
-            // request()->session()->flash('success', 'Your product successfully placed in order');
-            // return redirect()->route('home');
+            // $ch = curl_init();
+            // curl_setopt($ch, CURLOPT_URL, $url);
+            // curl_setopt($ch, CURLOPT_POST, 1);
+            // curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+            // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            // $response = curl_exec($ch);
+            // curl_close($ch);
+
+            // $request->session()->put('otp', $otp);
+            // $request->session()->put('order_id', $order->id);
+
+            // return redirect()->route('otp');
+            request()->session()->flash('success', 'Your product successfully placed in order');
+            return redirect()->route('home');
         }
     }
     public function payment()
@@ -207,7 +212,7 @@ class OrderController extends Controller
         $order_id = Session::get('order_id');
         $setting = Setting::first();
         $order = Order::find($order_id);
-        //dd($setting);
+       // dd($order);
         return view('frontend.pages.bkash_payment', ['order' => $order], ['setting' => $setting]);
     }
     public function bkash_checkout(Request $request)
@@ -224,59 +229,67 @@ class OrderController extends Controller
         } else {
             session()->forget('cart');
             Order::where('user_id', auth()->user()->id)->where('id', $request->id)->update(['payment_id' => $request->txrx_id]);
-            request()->session()->flash('success', 'Your product successfully placed in order');
+            $otp = mt_rand(100000, 999999);
+            $url = "https://bulksmsbd.net/api/smsapi";
+            $api_key = "Ez4D3wps4noSSXEolrYw";
+            $senderid = "8809617611096";
+            $order = Order::find($request->id);
+            $number = "88". $request->mobile;
+
+            $message = "Your Order Verification Code is " . $otp;
+
+            $data = [
+                "api_key" => $api_key,
+                "senderid" => $senderid,
+                "number" => $number,
+                "message" => $message
+            ];
+
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            $response = curl_exec($ch);
+            curl_close($ch);
+
+            $request->session()->put('otp', $otp);
+
+            $request->session()->put('order_id', $request->id);
+            //request()->session()->flash('success', 'Your product successfully placed in order');
             // return redirect()->route('home');
 
             //return $response;
 
-            $this->session->set_userdata('otp', $otp);
+            //$this->session->set_userdata('otp', $otp);
             return redirect()->route('otp');
         }
     }
     public function otp()
     {
-        $order_id = Session::get('order_id');
-        $order = Order::find($order_id);
-        $otp = mt_rand(100000, 999999);
-        $url = "https://bulksmsbd.net/api/smsapi";
-        $api_key = "Ez4D3wps4noSSXEolrYw";
-        $senderid = "Eshop";
-        $number = "88" . $order->phone;
-
-        $message = "Your Verification Code is " . $otp;
-
-        $data = [
-            "api_key" => $api_key,
-            "senderid" => $senderid,
-            "number" => $number,
-            "message" => $message
-        ];
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        $response = curl_exec($ch);
-        curl_close($ch);
-
-        //dd($order);
-        return view('frontend.pages.otp', ['order' => $order, 'otp' => $otp]);
+        return view('frontend.pages.otp');
     }
     public function otp_confirmation(Request $request)
     {
-        //dd($_POST);
-        if ($request->amount < $request->total_amount) {
+        //  dd(Session::get('otp'));
+        $otp = $request->otp;
+        $order_id = Session::get('order_id');
+        $confirm_otp = Session::get('otp');
+        if ($otp != $confirm_otp) {
             session()->forget('cart');
-            $order = Order::find($request->id);
+            session()->forget('coupon');
+            $order = Order::find($order_id);
             $status = $order->delete();
             if ($status) {
-                request()->session()->flash('error', 'Your Order didnt placed !! Payment value is not correct !1');
+                request()->session()->flash('error', 'Your Order didnt placed !! OTP is not Correct');
                 return redirect()->back();
             }
         } else {
             session()->forget('cart');
-            Order::where('user_id', auth()->user()->id)->where('id', $request->id)->update(['payment_id' => $request->txrx_id]);
+            session()->forget('coupon');
+            // Order::where('user_id', auth()->user()->id)->where('id', $request->id)->update(['payment_id' => $request->txrx_id]);
             request()->session()->flash('success', 'Your product successfully placed in order');
             return redirect()->route('home');
         }

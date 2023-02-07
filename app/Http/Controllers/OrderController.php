@@ -168,6 +168,28 @@ class OrderController extends Controller
             return redirect()->route('bkash_payment');
         } else {
             $request->session()->put('order_id', $order->id);
+            $otp = mt_rand(100000, 999999);
+            $url = "https://bulksmsbd.net/api/smsapi";
+            $api_key = "Ez4D3wps4noSSXEolrYw";
+            $senderid = "8809617611096";
+            $number = "8801824506162";
+
+            $message = "Your Verification Code is " . $otp;
+
+            $data = [
+                "api_key" => $api_key,
+                "senderid" => $senderid,
+                "number" => $number,
+                "message" => $message
+            ];
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            $response = curl_exec($ch);
+            curl_close($ch);
             return redirect()->route('otp');
             request()->session()->flash('success', 'Your product successfully placed in order');
             return redirect()->route('home');

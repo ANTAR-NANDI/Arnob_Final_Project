@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9d8114f61c5fb58c060cfa9c413f04bb",
+    "content-hash": "d32722f0feade14e210b7401ef4d1c75",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1113,16 +1113,16 @@
         },
         {
             "name": "iqbalhasandev/laravel-bulksmsbd",
-            "version": "V2.1",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/iqbalhasandev/laravel-bulksmsbd.git",
-                "reference": "9ddc887a9a927287f8159a610d68b66ecbd98156"
+                "reference": "c648fdac03a30b1c4c2c2c655067f17e52111c51"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/iqbalhasandev/laravel-bulksmsbd/zipball/9ddc887a9a927287f8159a610d68b66ecbd98156",
-                "reference": "9ddc887a9a927287f8159a610d68b66ecbd98156",
+                "url": "https://api.github.com/repos/iqbalhasandev/laravel-bulksmsbd/zipball/c648fdac03a30b1c4c2c2c655067f17e52111c51",
+                "reference": "c648fdac03a30b1c4c2c2c655067f17e52111c51",
                 "shasum": ""
             },
             "require": {
@@ -1168,9 +1168,10 @@
             ],
             "support": {
                 "issues": "https://github.com/iqbalhasandev/laravel-bulksmsbd/issues",
-                "source": "https://github.com/iqbalhasandev/laravel-bulksmsbd/tree/V2.1"
+                "source": "https://github.com/iqbalhasandev/laravel-bulksmsbd/tree/3.0.0"
             },
-            "time": "2020-11-08T03:11:31+00:00"
+            "abandoned": "nanopkg/laravel-bulk-sms-bd",
+            "time": "2023-01-09T06:07:40+00:00"
         },
         {
             "name": "laravel/framework",

@@ -83,7 +83,11 @@
 								@php
 								$after_discount=($product_detail->price-(($product_detail->price*$product_detail->discount)/100));
 								@endphp
-								<p class="price"><span class="discount">TK {{number_format($after_discount,2)}}</span><s>TK {{number_format($product_detail->price,2)}}</s> </p>
+								<p class="price"><span class="discount">TK {{number_format($after_discount,2)}}</span>
+								@if($product_detail->discount > 0)
+								<s>TK {{number_format($product_detail->price,2)}}</s>
+								@endif
+							</p>
 								<p class="description">{!!($product_detail->summary)!!}</p>
 							</div>
 							<!--/ End Description -->
@@ -328,8 +332,9 @@
 								<!-- <img class="default-img" src="{{$photo[0]}}" alt="{{$photo[0]}}"> -->
 								<!-- <img class="hover-img" src="{{$photo[0]}}" alt="{{$photo[0]}}"> -->
 								<img src="{{asset('/uploads/images/products'). '/' . $data->photo}}" alt="Category_image">
-
+								@if($data->discount > 0)
 								<span class="price-dec">{{$data->discount}} % Off</span>
+								@endif
 								{{-- <span class="out-of-stock">Hot</span> --}}
 							</a>
 							<div class="button-head">
@@ -349,8 +354,11 @@
 								@php
 								$after_discount=($data->price-(($data->discount*$data->price)/100));
 								@endphp
-								<span class="old">TK {number_format($data->price,2)}}</span>
-								<span>TK {{number_format($after_discount,2)}}</span>
+								<span >TK {{number_format($data->price,2)}}</span>
+								<!-- @if($data->discount > 0) -->
+
+								<span class="old">TK {{number_format($after_discount,2)}}</span>
+								<!-- @endif -->
 							</div>
 
 						</div>

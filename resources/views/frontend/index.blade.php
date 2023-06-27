@@ -170,7 +170,9 @@
                                         $after_discount=($product->price-($product->price*$product->discount)/100);
                                         @endphp
                                         <span>TK {{number_format($after_discount,2)}}</span>
+                                        @if($product->discount>0)
                                         <del style="padding-left:4%;">TK {{number_format($product->price,2)}}</del>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -312,7 +314,7 @@
                                 <div class="col-lg-6 col-md-6 col-12 no-padding">
                                     <div class="content">
                                         <h4 class="title"><a href="#">{{$product->title}}</a></h4>
-                                        <p class="price with-discount">TK {{number_format($product->discount,2)}}</p>
+                                        <p class="price with-discount">TK {{number_format($product->price,2)}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -406,7 +408,7 @@
                 <div class="single-service">
                     <i class="ti-rocket"></i>
                     <h4>Free shiping</h4>
-                    <p>Orders over $100</p>
+                    <p>Orders over TK 100</p>
                 </div>
                 <!-- End Single Service -->
             </div>

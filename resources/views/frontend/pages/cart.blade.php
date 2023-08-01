@@ -123,7 +123,7 @@
 						<div class="col-lg-4 col-md-7 col-12">
 							<div class="right">
 								<ul>
-									<li class="order_subtotal" data-price="{{Helper::totalCartPrice()}}">Cart Subtotal<span>${{number_format(Helper::totalCartPrice(),2)}}</span></li>
+									<li class="order_subtotal" data-price="{{Helper::totalCartPrice()}}">Cart Subtotal<span>Tk{{number_format(Helper::totalCartPrice(),2)}}</span></li>
 									{{-- <div id="shipping" style="display:none;">
 											<li class="shipping">
 												Shipping {{session('shipping_price')}}
@@ -155,9 +155,9 @@
 							}
 							@endphp
 							@if(session()->has('coupon'))
-							<li class="last" id="order_total_price">You Pay<span>${{number_format($total_amount,2)}}</span></li>
+							<li class="last" id="order_total_price">You Pay<span>Tk{{number_format($total_amount,2)}}</span></li>
 							@else
-							<li class="last" id="order_total_price">You Pay<span>${{number_format($total_amount,2)}}</span></li>
+							<li class="last" id="order_total_price">You Pay<span>TK{{number_format($total_amount,2)}}</span></li>
 							@endif
 							</ul>
 							<div class="button5">
@@ -184,7 +184,7 @@
 				<div class="single-service">
 					<i class="ti-rocket"></i>
 					<h4>Free shiping</h4>
-					<p>Orders over $100</p>
+					<p>Orders over Tk100</p>
 				</div>
 				<!-- End Single Service -->
 			</div>

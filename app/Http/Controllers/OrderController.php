@@ -236,7 +236,7 @@ class OrderController extends Controller
             $order = Order::find($request->id);
             $number = "88". $request->mobile;
 
-            $message = "Your Order Verification Code is " . $otp;
+            $message = "Babui Tomar Order Verification Code is " . $otp;
 
             $data = [
                 "api_key" => $api_key,

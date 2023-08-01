@@ -83,7 +83,7 @@
                     <div class="order-details">
 
                         <!--/ End Order Widget -->
-                        <h2 style="margin-left: 18px;">{{ $setting->phone}}</h2>
+                        <h2 class="text-center">{{ $setting->phone}}</h2>
                         <!-- Payment Method Widget -->
                         <div class="single-widget payement">
                             <div class="content">
@@ -119,7 +119,7 @@
                 <div class="single-service">
                     <i class="ti-rocket"></i>
                     <h4>Free shiping</h4>
-                    <p>Orders over $100</p>
+                    <p>Orders over TK 100</p>
                 </div>
                 <!-- End Single Service -->
             </div>

@@ -194,7 +194,7 @@
 				<div class="single-service">
 					<i class="ti-rocket"></i>
 					<h4>Free shiping</h4>
-					<p>Orders over $100</p>
+					<p>Orders over TK 100</p>
 				</div>
 				<!-- End Single Service -->
 			</div>

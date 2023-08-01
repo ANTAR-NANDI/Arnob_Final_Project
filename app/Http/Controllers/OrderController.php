@@ -236,7 +236,7 @@ class OrderController extends Controller
             $order = Order::find($request->id);
             $number = "88". $request->mobile;
 
-            $message = "Babui Tomar Order Verification Code is " . $otp;
+            $message = "Your Order Verification Code is " . $otp;
 
             $data = [
                 "api_key" => $api_key,
@@ -291,8 +291,18 @@ class OrderController extends Controller
             session()->forget('coupon');
             // Order::where('user_id', auth()->user()->id)->where('id', $request->id)->update(['payment_id' => $request->txrx_id]);
             request()->session()->flash('success', 'Your product successfully placed in order');
-            return redirect()->route('home');
+            return redirect()->route('order_confirmation');
         }
+    }
+    public function order_confirmation()
+    {
+        $order_id = Session::get('order_id');
+        $order = Order::find($order_id);
+        //dd($order);
+         return view('frontend.pages.order_confirmation')->with('order', $order);
+
+
+        return view('frontend.pages.order_confirmation');
     }
 
     /**

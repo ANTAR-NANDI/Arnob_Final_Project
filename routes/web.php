@@ -229,4 +229,5 @@ Route::post('/bkash_checkout', [OrderController::class, 'bkash_checkout'])->name
 //Otp Confirmation
 Route::get('otp', [OrderController::class, 'otp'])->name('otp');
 Route::post('/otp_confirmation', [OrderController::class, 'otp_confirmation'])->name('otp_confirmation');
+Route::get('/order_confirmation', [OrderController::class, 'order_confirmation'])->name('order_confirmation');;
 
